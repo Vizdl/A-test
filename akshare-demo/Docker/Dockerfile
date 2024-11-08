@@ -11,5 +11,8 @@ RUN	apt update
 RUN	apt install python3 python3-pip -y
 # 安装 akshare(数据来源)
 RUN pip install akshare --upgrade
-# 安装 pybroker(回测工具)
+# 安装 pybroker(机器学习算法)
 RUN pip install lib-pybroker
+# 安装 backtrader(回测工具)
+RUN pip install backtrader
+RUN pip install matplotlib
