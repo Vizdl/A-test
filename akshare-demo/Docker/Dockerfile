@@ -16,3 +16,5 @@ RUN pip install lib-pybroker
 # 安装 backtrader(回测工具)
 RUN pip install backtrader
 RUN pip install matplotlib
+# 安装传输文件
+RUN apt install lrzsz
