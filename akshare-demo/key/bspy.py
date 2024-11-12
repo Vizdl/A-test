@@ -1,11 +1,18 @@
+import sys
+sys.path.append('lib')
 import pandas as pd
 from jye import *
+from zt import *
 
-# 读取 CSV 文件
-df = pd.read_csv('zt.csv', dtype={'代码': str})
+date = "20241111"
 
 # 提取的股票代码列表
 target_codes = ['000599', '603928']  # 你可以根据需要修改这个数组
+
+# 读取 CSV 文件
+df = get_zt_pool(date)
+
+# print(df)
 
 # 遍历股票代码列表，提取对应信息
 for code in target_codes:
@@ -34,10 +41,10 @@ for code in target_codes:
         # 设置时间区间（例如：10:05:12 到 15:00:00）
         start_time = pd.to_datetime(首次封板时间, format='%H%M%S')
         end_time = pd.to_datetime('150000', format='%H%M%S')
-        if not exists_trading_volume(代码):
-            down_trading_volume(代码)
+        if not exists_trading_volume(date, 代码):
+            down_trading_volume(date, 代码)
 
-        板上交易额 = get_trading_volume(代码, start_time, end_time)
+        板上交易额 = get_trading_volume(date, 代码, start_time, end_time)
 
         # 打印所有字段信息
         print(f"代码: {代码}")

@@ -11,3 +11,8 @@ def down_zt_poll(date):
     # print(stock_zt_pool_em_df)
     # 保存为 CSV 文件
     stock_zt_pool_em_df.to_csv(f'cache/zt/{date}.csv', index=False)
+
+def get_zt_pool(date):
+    # 读取 CSV 文件
+    df = pd.read_csv(f'cache/zt/{date}.csv', dtype={'代码': str})
+    return df

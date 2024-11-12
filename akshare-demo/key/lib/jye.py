@@ -1,21 +1,22 @@
-# 未炸板的首板的板上抛压测试
-# 板前交易量
-# 换手率(实)
-# 交易额与近期对比
 import pandas as pd
 import akshare as ak
 from pathlib import Path
 
+# 未炸板的首板的板上抛压测试
+# 板前交易量
+# 换手率(实)
+# 交易额与近期对比
+
 # 判断交易额数据是否存在
-def exists_trading_volume(code):
-    file_path = Path(f'{code}.csv')
+def exists_trading_volume(date, code):
+    file_path = Path(f'cache/jye/{date}/{code}.csv')
     # 检查文件是否已存在
     return file_path.exists()
 
 # 下载交易额数据
-def down_trading_volume(code):
+def down_trading_volume(date, code):
     stock_zh_a_tick_tx_js_df = ak.stock_zh_a_tick_tx_js(symbol="sh" + code)
-    print(stock_zh_a_tick_tx_js_df)
+    # print(stock_zh_a_tick_tx_js_df)
     # 保存为 CSV 文件
     stock_zh_a_tick_tx_js_df.to_csv(f'{code}.csv', index=False)
 
@@ -23,10 +24,10 @@ def down_trading_volume(code):
 # 1. 股票代码
 # 2. 开始时间
 # 2. 结束时间
-def get_trading_volume(code, start_time, end_time):
+def get_trading_volume(date, code, start_time, end_time):
     # 读取 CSV 文件，并使用 `parse_dates` 和 `date_format` 来解析时间
     df = pd.read_csv(
-        f"{code}.csv",
+        f'cache/jye/{date}/{code}.csv',
         parse_dates=['成交时间'],  # 自动解析为 datetime 类型
         date_format='%H:%M:%S'   # 使用 date_format 指定时间格式
     )
