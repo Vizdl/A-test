@@ -1,0 +1,14 @@
+import akshare as ak
+
+def get_all_stock():
+    # 获取 A股所有股票列表
+    stock_list = ak.stock_info_a_code_name()
+
+    # 打印股票代码和股票名称
+    print(stock_list)
+    stock_list.to_csv("A_shares_stock_codes.csv", index=False)
+
+
+def get_stock_info(code):
+    stock_individual_info_em_df = ak.stock_individual_info_em(symbol="000001")
+    print(stock_individual_info_em_df)
