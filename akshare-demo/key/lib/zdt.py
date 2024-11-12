@@ -2,6 +2,10 @@ import akshare as ak
 import pandas as pd
 from pathlib import Path
 
+def down_pool(date, func):
+    df = func(date=date)
+    df.to_csv(f'cache/zt/{date}.csv', index=False)
+
 # 涨停池
 def down_zt_pool(date):
     df = ak.stock_zt_pool_em(date=date)
@@ -55,3 +59,15 @@ def get_dt_pool(date):
     update_dt_pool(date)
     df = pd.read_csv(f'cache/dt/{date}.csv', dtype={'代码': str})
     return df
+
+def update_zt_date(date):
+    df = get_zt_pool(date)
+    for code in df['代码']:
+        # 筛选出对应的股票信息
+        stock_info = df[df['代码'] == code]
+
+
+def update_zdt_data(date):
+
+    dt_df = get_dt_pool(date)
+    zb_df = get_zb_pool(date)

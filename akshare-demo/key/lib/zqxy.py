@@ -1,5 +1,6 @@
 import akshare as ak
 import pandas as pd
+from datetime import datetime
 from pathlib import Path
 
 # 获取当前日期
@@ -19,7 +20,7 @@ def exists_zqxy():
 
 def update_zqxy():
     if not exists_zqxy():
-        down_zqxy(date, code)
+        down_zqxy()
         
 def get_trading_volume():
     update_zqxy()
