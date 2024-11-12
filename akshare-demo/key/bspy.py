@@ -2,12 +2,14 @@ import sys
 sys.path.append('lib')
 import pandas as pd
 from jye import *
-from zt import *
+from zdt import *
 
 date = "20241111"
+target_codes = ['000599', '603928']
 
-# 提取的股票代码列表
-target_codes = ['000599', '603928']  # 你可以根据需要修改这个数组
+# date = "20241112"
+# target_codes = ['002846', '000550']
+
 
 # 读取 CSV 文件
 df = get_zt_pool(date)
@@ -41,8 +43,6 @@ for code in target_codes:
         # 设置时间区间（例如：10:05:12 到 15:00:00）
         start_time = pd.to_datetime(首次封板时间, format='%H%M%S')
         end_time = pd.to_datetime('150000', format='%H%M%S')
-        if not exists_trading_volume(date, 代码):
-            down_trading_volume(date, 代码)
 
         板上交易额 = get_trading_volume(date, 代码, start_time, end_time)
 

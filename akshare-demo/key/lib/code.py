@@ -8,8 +8,6 @@ def down_all_stock():
     print(stock_list)
     stock_list.to_csv("A_shares_stock_codes.csv", index=False)
 
-
-
 def get_stock_info(code):
     stock_individual_info_em_df = ak.stock_individual_info_em(symbol=code)
     print(stock_individual_info_em_df)

@@ -1,6 +1,7 @@
 import pandas as pd
 import akshare as ak
 from pathlib import Path
+import os
 
 # 未炸板的首板的板上抛压测试
 # 板前交易量
@@ -16,15 +17,23 @@ def exists_trading_volume(date, code):
 # 下载交易额数据
 def down_trading_volume(date, code):
     stock_zh_a_tick_tx_js_df = ak.stock_zh_a_tick_tx_js(symbol="sh" + code)
+    # 使用 os.makedirs 创建文件夹，如果文件夹已存在不会报错
+    os.makedirs(f'cache/jye/{date}', exist_ok=True)
     # print(stock_zh_a_tick_tx_js_df)
     # 保存为 CSV 文件
-    stock_zh_a_tick_tx_js_df.to_csv(f'{code}.csv', index=False)
+    stock_zh_a_tick_tx_js_df.to_csv(f'cache/jye/{date}/{code}.csv', index=False)
+
+def update_trading_volume(date, code):
+    if not exists_trading_volume(date, code):
+        down_trading_volume(date, code)
 
 # 查看交易额
 # 1. 股票代码
 # 2. 开始时间
 # 2. 结束时间
 def get_trading_volume(date, code, start_time, end_time):
+    update_trading_volume(date, code)
+
     # 读取 CSV 文件，并使用 `parse_dates` 和 `date_format` 来解析时间
     df = pd.read_csv(
         f'cache/jye/{date}/{code}.csv',
