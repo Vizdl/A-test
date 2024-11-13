@@ -19,7 +19,7 @@ def down_trading_volume(date, code):
     stock_zh_a_tick_tx_js_df = ak.stock_zh_a_tick_tx_js(symbol="sh" + code)
     # 使用 os.makedirs 创建文件夹，如果文件夹已存在不会报错
     os.makedirs(f'cache/jye/{date}', exist_ok=True)
-    # print(stock_zh_a_tick_tx_js_df)
+    print(stock_zh_a_tick_tx_js_df)
     # 保存为 CSV 文件
     stock_zh_a_tick_tx_js_df.to_csv(f'cache/jye/{date}/{code}.csv', index=False)
 
