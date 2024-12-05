@@ -5,7 +5,7 @@ from zdt import *
 from zqxy import *
 from utils import *
 
-date="20241113"
+date="20241114"
 
 # 涨跌停股票
 update_zt_pool(date=date)
